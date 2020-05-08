@@ -1,0 +1,26 @@
+BEGIN LOADCASE
+    NAM_LC              {{ load_case.nam_lc }}      ; header of the loadcase
+    DES_LC              {{ load_case.des_lc }}      ; sub-header of the loadcase
+    WF_LC               {{ load_case.wf_lc }}       ; weighting factor of the loadcase
+    METHOD              {{ load_case.method }}      ; type of evaluation [cora/ISO9790]
+
+    {% if load_case.data_files != [] %}
+        BEGIN DATAFILES
+        {% for data_file in load_case.data_files %}
+            {{ data_file.name }} {{ data_file.timeshift }} {{ data_file.unit }} {{ data_file.g }}
+        {% endfor %}
+        END DATAFILES
+    {% endif %}
+
+    {% if load_case.signals != [] %}
+        BEGIN SIGNALS
+            {% for signal in load_case.signals %}
+                {{ signal.name }} {{ signal.wf }} {{ signal.y_norm }} {{ signal.t_min }} {{ signal.t_max }} {{ signal.g_v }} {{ signal.g_p }} {{ signal.g_g }} {{ signal.g_1 }} {{ signal.g_2 }} {{ signal.a_0 }} {{ signal.b_0 }} {{ signal.a_t }} {{ signal.a_sigma }} {{ signal.b_sigma }} {{ signal.d_min }} {{ signal.d_max }} {{ signal.filter }}
+            {% endfor %}
+        END SIGNALS
+    {% endif %}
+
+    {% for sub_load_case in load_case.sub_load_case %}
+        {% include 'sub_load_case.jinja' %}
+    {% endfor %}
+END LOADCASE

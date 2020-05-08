@@ -1,0 +1,22 @@
+BEGIN SUBLOADCASE
+    NAM_SLC             {{ sub_load_case.nam_slc }}    ; header of the loadcase
+    DES_SLC             {{ sub_load_case.des_slc }}    ; sub-header of the loadcase
+    WF_SLC              {{ sub_load_case.wf_slc }}     ; weighting factor of the loadcase
+    METHOD              {{ sub_load_case.method }}     ; type of evaluation [cora/ISO9790]
+
+    {% if sub_load_case.data_files != [] %}
+        BEGIN DATAFILES
+        {% for data_file in sub_load_case.data_files %}
+            {{ data_file.name }} {{ data_file.timeshift }} {{ data_file.unit }} {{ data_file.g }}
+        {% endfor %}
+        END DATAFILES
+    {% endif %}
+
+    {% if sub_load_case.signals != [] %}
+        BEGIN SIGNALS
+            {% for signal in sub_load_case.signals %}
+                {{ signal.name }} {{ signal.wf }} {{ signal.y_norm }} {{ signal.t_min }} {{ signal.t_max }} {{ signal.g_v }} {{ signal.g_p }} {{ signal.g_g }} {{ signal.g_1 }} {{ signal.g_2 }} {{ signal.a_0 }} {{ signal.b_0 }} {{ signal.a_t }} {{ signal.a_s }} {{ signal.b_s }} {{ signal.d_min }} {{ signal.d_max }} {{ signal.filter }}
+            {% endfor %}
+        END SIGNALS
+    {% endif %}
+END SUBLOADCASE

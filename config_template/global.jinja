@@ -1,0 +1,49 @@
+BEGIN GLOBAL_PARAMETERS
+    DES_MOD             {{ global_obj.des_mod }}                                ; header of the evaluation
+    DES_GLO             {{ global_obj.des_glo }}                                ; sub-header of the evaluation
+
+    # global settings to define the interval of evaluation
+    A_THRES             {{ global_obj.a_thres }}                                ; threshold to set the start of the interval of evaluation [0,...,1]
+    B_THRES             {{ global_obj.b_thres }}                                ; threshold to set the end of the interval of evaluation [0,...,1]
+    A_EVAL              {{ global_obj.a_eval }}                                 ; extension of the interval of evaluation [0,...,1]
+    B_DELTA_END         {{ global_obj.b_delta_end }}                            ; additional parameter to shorten the interval of evaluation (width of the corridor: A_DELTA_END*Y_NORM) 0 = disabled
+    T_MIN/T_MAX         {{ global_obj.t_min }} {{ global_obj.t_max }}               ; manually defined start (time) and end (time) of the interval of evaluation (automatic = calculated for each channel)
+
+    # global settings of the corridor method
+    K                   {{ global_obj.k }}                                      ; transition between ratings of 1 and 0 of the corridor method [-] (1 = linear, 2 = quadratic ...)
+    G_1                 {{ global_obj.g_1 }}                                    ; weighting factor of the corridor method [-]
+    a_0/b_0             {{ global_obj.a_0 }} {{ global_obj.b_0 }}                   ; width of the inner and outer corridor [-]
+    a_sigma/b_sigma     {{ global_obj.a_sigma }} {{ global_obj.b_sigma }}           ; multiples of the standard deviation to widen the inner and outer corridor [-]
+
+    # global settings of the cross correlation method
+    D_MIN               {{ global_obj.d_min }}                                  ; delta_min as share of the interval of evaluation [0,...,1]
+    D_MAX               {{ global_obj.d_max }}                                  ; delta_max as share of the interval of evaluation [0,...,1]
+    INT_MIN             {{ global_obj.int_min }}                                ; minimum overlap of the interval [0,...,1]
+    K_V                 {{ global_obj.k_v }}                                    ; transition between ratings of 1 and 0 of the progression rating [-] (1 = linear, 2 = quadratic ...)
+    K_G                 {{ global_obj.k_g }}                                    ; transition between ratings of 1 and 0 of the size rating [-] (1 = linear, 2 = quadratic ...)
+    K_P                 {{ global_obj.k_p }}                                    ; transition between ratings of 1 and 0 of the phase shift rating [-] (1 = linear, 2 = quadratic ...)
+    G_V                 {{ global_obj.g_v }}                                    ; weighting factors of the progression rating [-]
+    G_G                 {{ global_obj.g_g }}                                    ; weighting factors of the size rating [-]
+    G_P                 {{ global_obj.g_p }}                                    ; weighting factors of the phase shift rating [-]
+    G_2                 {{ global_obj.g_2 }}                                    ; weighting factors of the cross correlation method [-]
+
+    # normalisation of the the weighting factors
+    WF_NORM             {{ global_obj.wf_norm }}                                ; normalisation of the weighting factors [YES/NO]?
+
+    # signal settings
+    ISONAME_1-2/11-12   {{ global_obj.isoname_1_2 }} {{ global_obj.isoname_11_12 }} ; consideration of the position 1/2 (test object, seating position) and 11/12 (fine location 3 - dummy) of the ISO code [YES/NO]
+    MIN_NORM            {{ global_obj.min_norm }}                               ; threshold (as fraction of the global absolute maximum amplitude) to start special treatment of secondary axis [0,...,1]
+    Y_NORM              {{ global_obj.y_norm }}                                 ; type of calculation of Y_NORM (extremum or value)
+
+    # format settings of the html report
+    OUTPUT_FORMAT       {{ global_obj.output_format }}                          ; export format (LSPOST, PAMVIEW or Hypergraph)
+
+    # layout of the html report
+    FONT_SMALL          {{ global_obj.font_small }}                             ; size of the small font
+    FONT_LARGE          {{ global_obj.font_large }}                             ; size of the large font
+    PreT_LC/PostT_LC    {{ global_obj.pret_lc }}  {{ global_obj.postt_lc }}         ; expansion of the plotted interval of the curves (-1: complete curve)
+END GLOBAL_PARAMETERS
+
+{% for load_case in global_obj.load_cases %}
+    {% include 'load_case.jinja' %}
+{% endfor %}
