@@ -113,7 +113,7 @@ class Signal(GlobalObj):
 def write(global_obj):
     # create jinja2 environment
     # location of the templates folder
-    jinja_env = Environment(loader=FileSystemLoader("C:\\Users\\Stromel\\Data\\Cora\\config_template"))
+    jinja_env = Environment(loader=FileSystemLoader("cora\\config_template"))
     # get main template
     template = jinja_env.get_template("global.jinja")
 

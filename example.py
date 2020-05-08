@@ -3,11 +3,11 @@ from cora import write, GlobalObj
 global_obj = GlobalObj()
 global_obj.add_load_case()
 
-global_obj.load_cases[0].add_data_file("C:\\Users\\Stromel\\Downloads\\CORAplus404complete_170621(1)\\examples\\standard\\data\\loadcase_01\\iso\\test_01.iso")
-global_obj.load_cases[0].add_data_file("C:\\Users\\Stromel\\Downloads\\CORAplus404complete_170621(1)\\examples\\standard\\data\\loadcase_01\\iso\\test_02.iso")
-global_obj.load_cases[0].add_data_file("C:\\Users\\Stromel\\Downloads\\CORAplus404complete_170621(1)\\examples\\standard\\data\\loadcase_01\\iso\\test_03.iso")
-global_obj.load_cases[0].add_data_file("C:\\Users\\Stromel\\Downloads\\CORAplus404complete_170621(1)\\examples\\standard\\data\\loadcase_01\\iso\\test_04.iso")
-global_obj.load_cases[0].add_data_file("C:\\Users\\Stromel\\Downloads\\CORAplus404complete_170621(1)\\examples\\standard\\data\\loadcase_01\\iso\\cae_01.iso")
+global_obj.load_cases[0].add_data_file("..\\data\\loadcase_01\\iso\\test_01.iso")
+global_obj.load_cases[0].add_data_file("..\\data\\loadcase_01\\iso\\test_02.iso")
+global_obj.load_cases[0].add_data_file("..\\data\\loadcase_01\\iso\\test_03.iso")
+global_obj.load_cases[0].add_data_file("..\\data\\loadcase_01\\iso\\test_04.iso")
+global_obj.load_cases[0].add_data_file("..\\data\\loadcase_01\\iso\\cae_01.iso")
 
 global_obj.load_cases[0].add_signal("S1SENS010000DS0D")
 global_obj.load_cases[0].add_signal("S1SENS020000FO0D")
