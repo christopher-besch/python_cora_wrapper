@@ -124,5 +124,5 @@ def write(global_obj):
             print(line.strip())
             text += line.strip() + "\n"
 
-    with open("C:\\Users\\Stromel\\Desktop\\test\\conf.cps", "w", encoding="utf-8") as file:
+    with open("\\conf.cps", "w", encoding="utf-8") as file:
         file.write(text)
